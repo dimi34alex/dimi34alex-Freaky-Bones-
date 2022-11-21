@@ -7,11 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:billy bones/Assets/Material.mat
-  m_Name: Material
-========
-  m_Name: Summer_Wall
->>>>>>>> 8c3eb89e9355e482c860d81c15e658900e04bed2:billy bones/Assets/Flat Textures Pack/Materials/Summer_Wall.mat
+  m_Name: Loc1_DemonDoor
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -45,13 +41,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-<<<<<<<< HEAD:billy bones/Assets/Material.mat
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
-========
-        m_Texture: {fileID: 2800000, guid: b6729a0d44c32e94a9e0ead2606f79a2, type: 3}
-        m_Scale: {x: 60, y: 30}
->>>>>>>> 8c3eb89e9355e482c860d81c15e658900e04bed2:billy bones/Assets/Flat Textures Pack/Materials/Summer_Wall.mat
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -84,6 +75,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.26415092, g: 0.13288438, b: 0.12335349, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
