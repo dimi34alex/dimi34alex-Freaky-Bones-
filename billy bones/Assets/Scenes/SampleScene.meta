@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:billy bones/Assets/Scenes/SampleScene.meta
 guid: 7e92f9cab0ed0314683f63f57bf22e34
+========
+guid: 49e732f2675fc0c4f9ef9b5f40893837
+>>>>>>>> 8c3eb89e9355e482c860d81c15e658900e04bed2:billy bones/Assets/Flat Textures Pack.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

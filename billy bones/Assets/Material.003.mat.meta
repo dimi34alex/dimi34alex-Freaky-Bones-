@@ -1,7 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:billy bones/Assets/Material.003.mat.meta
 guid: cdedf1c64f0de97438c43454784b4bd7
 NativeFormatImporter:
   externalObjects: {}
+========
+guid: 7f61e96487dd8084480def67ee56f766
+timeCreated: 1551206128
+licenseType: Store
+NativeFormatImporter:
+>>>>>>>> 8c3eb89e9355e482c860d81c15e658900e04bed2:billy bones/Assets/Flat Textures Pack/Materials/Cave_Cracks.mat.meta
   mainObjectFileID: 2100000
   userData: 
   assetBundleName: 

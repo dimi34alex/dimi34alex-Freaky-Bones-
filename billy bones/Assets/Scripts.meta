@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:billy bones/Assets/Scripts.meta
 guid: 4320ceb8aad2c3a4aa590705e37222f1
+========
+guid: 828b868093b6457439653d86b19f532b
+>>>>>>>> 8c3eb89e9355e482c860d81c15e658900e04bed2:billy bones/Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
