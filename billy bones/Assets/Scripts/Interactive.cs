@@ -15,6 +15,7 @@ public class Interactive : MonoBehaviour
     {
         Ray();
         DrawRay();
+        Interact();
     }
 
     private void Ray()
@@ -27,6 +28,18 @@ public class Interactive : MonoBehaviour
         if(Physics.Raycast(_ray, out _hit,_maxDistanceRay))
         {
             Debug.DrawRay(_ray.origin, _ray.direction * _maxDistanceRay, Color.blue);
+        }
+    }
+
+    private void Interact()
+    {
+        if(_hit.transform.GetComponent<DemonDoor>())
+        {
+            Debug.DrawRay(_ray.origin, _ray.direction * _maxDistanceRay, Color.green);
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                _hit.transform.GetComponent<DemonDoor>().Open();
+            }
         }
     }
 }
