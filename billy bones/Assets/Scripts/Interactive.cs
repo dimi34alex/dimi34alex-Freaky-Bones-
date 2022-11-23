@@ -31,14 +31,18 @@ public class Interactive : MonoBehaviour
         }
     }
 
+    public GameObject DIMON;
+    
     private void Interact()
     {
-        if(_hit.transform.GetComponent<DemonDoor>())
+        if(_hit.transform != null && _hit.transform.GetComponent<Richag1>())
         {
             Debug.DrawRay(_ray.origin, _ray.direction * _maxDistanceRay, Color.green);
             if(Input.GetKeyDown(KeyCode.E))
             {
-                _hit.transform.GetComponent<DemonDoor>().Open();
+
+                _hit.transform.GetComponent<Richag1>().Open();
+                DIMON.GetComponent<DemonDoor>().Open();
             }
         }
     }
