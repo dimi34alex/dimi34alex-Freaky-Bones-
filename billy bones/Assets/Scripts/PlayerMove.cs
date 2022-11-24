@@ -23,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
             if(Physics.Raycast(myRay, out hitInfo,100, whatCanBeClickedOn))
             {
-                myAgent.speed = 10;
+                myAgent.speed = 5;
                 myAgent.SetDestination(hitInfo.point);
             } 
         }
