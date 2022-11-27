@@ -9,9 +9,12 @@ public class PlayerMove : MonoBehaviour
 
     private NavMeshAgent myAgent;
 
+    private Animator anim;
+
     void Start()
     {
         myAgent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -25,11 +28,13 @@ public class PlayerMove : MonoBehaviour
             {
                 myAgent.speed = 5;
                 myAgent.SetDestination(hitInfo.point);
+                anim.SetBool("IsRunning", true);
             } 
         }
         else
         {
            myAgent.speed = 0;
+           anim.SetBool("IsRunning", false);
         }
     }
 }
