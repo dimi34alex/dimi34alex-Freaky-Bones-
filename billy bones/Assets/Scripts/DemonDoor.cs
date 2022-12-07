@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DemonDoor : MonoBehaviour
 {
-    private bool _isOpened;
+    private bool _isOpened = true;
     [SerializeField] private Animator _animator;
 
 

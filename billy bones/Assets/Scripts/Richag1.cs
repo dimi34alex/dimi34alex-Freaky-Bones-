@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Richag1 : MonoBehaviour
 {
-    private bool _RichOpened;
+    private bool _RichOpened = true;
     [SerializeField] private Animator _animator;
 
 
@@ -13,4 +13,5 @@ public class Richag1 : MonoBehaviour
         _animator.SetBool("RichOpened",_RichOpened);
         _RichOpened = !_RichOpened;
     }
+    
 }
