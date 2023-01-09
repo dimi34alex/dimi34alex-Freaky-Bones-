@@ -43,7 +43,7 @@ public class Interactive : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.E))
             {
                 _hit.transform.GetComponent<Richag1>().Open();
-                DIMON.GetComponent<DemonDoor>().Open();
+                DIMON.GetComponent<doorManager>().Open();
             }
         }
     }
