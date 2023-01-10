@@ -13,6 +13,8 @@ public class HandMove : MonoBehaviour
 
     public GameObject Hand;
 
+    public bool HasTorch = false;
+
     void Start()
     {
         myAgent = GetComponent<NavMeshAgent>();
@@ -40,7 +42,6 @@ public class HandMove : MonoBehaviour
            myAgent.speed = 0;
            myAgent.enabled = false;
            anim.SetBool("IsRunning", false);
-           anim.SetBool("Failed", false);
         }
     }
 }
