@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuPauseScript : MonoBehaviour
 {
-    public GameObject PauseMenu, PauseSettings;
+    public GameObject PauseMenu, PauseSettings, HelpPanel;
     public bool Quit_Press = false;
     public float timespeed = 1f;
 
@@ -25,6 +25,7 @@ public class MenuPauseScript : MonoBehaviour
     {
         PauseMenu.SetActive(false);
         PauseSettings.SetActive(false);
+        HelpPanel.SetActive(true);
         timespeed = 1f;
     }
 
@@ -50,6 +51,7 @@ public class MenuPauseScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu.SetActive(true);
+            HelpPanel.SetActive(false);
             timespeed = 0f;
         }
 
