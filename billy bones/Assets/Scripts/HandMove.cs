@@ -11,10 +11,12 @@ public class HandMove : MonoBehaviour
 
     private Animator anim;
 
+    public GameObject Hand;
+
     void Start()
     {
         myAgent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+        anim = Hand.GetComponent<Animator>();
     }
 
     void Update()

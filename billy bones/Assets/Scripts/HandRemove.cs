@@ -5,12 +5,13 @@ using UnityEngine;
 public class HandRemove : MonoBehaviour
 {
     public GameObject LeftHand;
+    public GameObject RealHand;
     public GameObject SpawnPoint;
     private Animator anim;
 
     void Start()
     {
-        anim = LeftHand.GetComponent<Animator>();
+        anim = RealHand.GetComponent<Animator>();
     }
 
     void Update()
