@@ -22,7 +22,8 @@ public class HandRemove : MonoBehaviour
             LeftHand.transform.localPosition = Vector3.zero;
             LeftHand.transform.localEulerAngles = new Vector3(0f,0f,0f);
             LeftHand.transform.parent = null;
-            anim.SetBool("Failed", true);
+            anim.SetTrigger("Fail");
         }
+
     }
 }
