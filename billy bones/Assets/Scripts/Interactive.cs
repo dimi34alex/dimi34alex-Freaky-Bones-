@@ -37,13 +37,16 @@ public class Interactive : MonoBehaviour
     public GameObject DIMON;
     private void Interact()
     {
-        if(_hit.transform != null && _hit.transform.GetComponent<Richag1>())
+        if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,interactivable))
         {
-            Debug.DrawRay(_ray.origin, _ray.direction * _maxDistanceRay, Color.green);
-            if(Input.GetKeyDown(KeyCode.E))
+            if(_hit.transform != null && _hit.transform.GetComponent<Richag1>() && (_hit.transform.GetComponent<Things_Trigger>().CanUse1 == true || _hit.transform.GetComponent<Things_Trigger>().CanUse2 == true))
             {
-                _hit.transform.GetComponent<Richag1>().Open();
-                DIMON.GetComponent<doorManager>().Open();
+                Debug.DrawRay(_ray.origin, _ray.direction * _maxDistanceRay, Color.green);
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    _hit.transform.GetComponent<Richag1>().Open();
+                    DIMON.GetComponent<doorManager>().Open();
+                }
             }
         }
     }
@@ -75,7 +78,7 @@ public class Interactive : MonoBehaviour
     {
         if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,item))
         {
-            if(_hit.transform.tag == "ThingToPick")
+            if(_hit.transform.tag == "ThingToPick" && _hit.transform.GetComponent<Things_Trigger>().CanUse1 == true)
             {
                 if(canPickUp) Drop();
                 current_Item = _hit.transform.gameObject;
