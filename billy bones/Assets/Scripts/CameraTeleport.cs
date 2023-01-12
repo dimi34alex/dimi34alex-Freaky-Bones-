@@ -22,15 +22,11 @@ public class CameraTeleport : MonoBehaviour
         if(SwitchView == true)
         {
             transform.position = CamPosP.transform.position;
-            Player.GetComponent<PlayerMove>().enabled = true;
-            Hand.GetComponent<HandMove>().enabled = false;
         }
 
         if(SwitchView == false)
         {
             transform.position = CamPosH.transform.position;
-            Hand.GetComponent<HandMove>().enabled = true;
-            Player.GetComponent<PlayerMove>().enabled = false;
         }
     }
 

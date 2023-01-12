@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     private NavMeshAgent myAgent;
     float timerStaminaRun = 0.0f;
     private Animator anim;
+    public GameObject Camera1;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && Camera1.GetComponent<CameraTeleport>().SwitchView == true)
         {
             Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
@@ -33,7 +34,7 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("IsRunning", true);
             }
         }
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetMouseButton(1) && Camera1.GetComponent<CameraTeleport>().SwitchView == true)
         {
 
             Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -42,7 +43,7 @@ public class PlayerMove : MonoBehaviour
             {
                 if (StaminaBar.instance.staminaBar.value >= 1)
                 {
-                    Debug.Log("ÀÂÇÀÛÂÀÛÕÂÀÕ");
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
                     if (timerStaminaRun >= costRunStamina)
                     {
                         StaminaBar.instance.UseStamina(1);

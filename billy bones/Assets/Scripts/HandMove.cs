@@ -33,7 +33,7 @@ public class HandMove : MonoBehaviour
             if(Physics.Raycast(myRay, out hitInfo,100, whatCanBeClickedOn))
             {
                 myAgent.enabled = true;
-                myAgent.speed = 5;
+                myAgent.speed = 3;
                 myAgent.acceleration = 1000;
                 myAgent.SetDestination(hitInfo.point);
                 anim.SetBool("IsRunning", true);
