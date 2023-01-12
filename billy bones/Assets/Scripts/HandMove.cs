@@ -13,7 +13,8 @@ public class HandMove : MonoBehaviour
 
     public GameObject Hand;
 
-    public bool HasTorch = false;
+    public GameObject Camera1;
+
 
     void Start()
     {
@@ -23,7 +24,8 @@ public class HandMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+
+        if (Input.GetMouseButton(0) && Camera1.GetComponent<CameraTeleport>().SwitchView == false)
         {
             Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
@@ -43,5 +45,7 @@ public class HandMove : MonoBehaviour
            myAgent.enabled = false;
            anim.SetBool("IsRunning", false);
         }
+
+
     }
 }
