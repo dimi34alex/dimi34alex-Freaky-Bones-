@@ -50,10 +50,11 @@ public class Interactive : MonoBehaviour
 
 
     private Outline outline;
+    public LayerMask interactivable;
 
     private void OutLining()
     {
-        if(_hit.transform != null && _hit.transform.GetComponent<Outline>())
+        if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,item) || Physics.Raycast(_ray, out _hit,_maxDistanceRay,interactivable))
         {
             outline = _hit.transform.GetComponent<Outline>();
             outline.GetComponent<Outline>().OutlineWidth = 4;
@@ -68,10 +69,11 @@ public class Interactive : MonoBehaviour
     public GameObject hand;
     GameObject current_Item;
     bool canPickUp;
+    public LayerMask item;
 
     void Pick_Item()
     {
-        if(Physics.Raycast(_ray, out _hit,_maxDistanceRay))
+        if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,item))
         {
             if(_hit.transform.tag == "ThingToPick")
             {

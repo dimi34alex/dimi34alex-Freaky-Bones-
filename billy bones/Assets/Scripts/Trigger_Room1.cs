@@ -5,12 +5,13 @@ using UnityEngine;
 public class Trigger_Room1 : MonoBehaviour
 {
     public GameObject potol;
-    public float count = 0;
+    public bool inRoom = false;
 
     void OnTriggerEnter (Collider other)
     {
         if(other.tag == "Player")
         {
+            inRoom = true;
             potol.GetComponent<Darkness>().Dark();
         }
     }
@@ -19,13 +20,17 @@ public class Trigger_Room1 : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            count += 1;
+            inRoom = true;
+        }
+        else
+        {
+            inRoom = false;
         }
     }
 
     void OnTriggerExit (Collider other)
     {
-        if(other.tag == "Player" && count != 0)
+        if(other.tag == "Player" && inRoom == false)
         {
             potol.GetComponent<Darkness>().DeDark();
         }
