@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class PlayerMove : MonoBehaviour
 {
     public LayerMask whatCanBeClickedOn;
-
+    public float costRunStamina = 0.1f;
     private NavMeshAgent myAgent;
-
+    float timerStaminaRun = 0.0f;
     private Animator anim;
 
     void Start()
@@ -27,11 +27,35 @@ public class PlayerMove : MonoBehaviour
             if(Physics.Raycast(myRay, out hitInfo,100, whatCanBeClickedOn))
             {
                 myAgent.enabled = true;
-                myAgent.speed = 5;
+                myAgent.speed = 5; 
                 myAgent.acceleration = 1000;
                 myAgent.SetDestination(hitInfo.point);
                 anim.SetBool("IsRunning", true);
-            } 
+            }
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            
+            Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn))
+            {
+                if (StaminaBar.instance.staminaBar.value >= 1)
+                {
+                    Debug.Log("ÀÂÇÀÛÂÀÛÕÂÀÕ");
+                    if (timerStaminaRun >= costRunStamina)
+                    {
+                        StaminaBar.instance.UseStamina(3);
+                        timerStaminaRun = 0.0f;
+                    }
+                    myAgent.speed = 10;
+                    timerStaminaRun += Time.fixedDeltaTime;
+                    myAgent.enabled = true;
+                    myAgent.acceleration = 1000;
+                    myAgent.SetDestination(hitInfo.point);
+                    anim.SetBool("IsRunning", true);
+                }
+            }
         }
         else
         {
