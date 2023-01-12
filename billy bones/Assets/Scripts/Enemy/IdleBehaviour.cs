@@ -24,7 +24,7 @@ public class IdleBehaviour : StateMachineBehaviour
         timer += Time.deltaTime;
         float distanse = Vector3.Distance(animator.transform.position, player.position);
 
-        if (distanse < chaseRange)
+        if (distanse < animator.GetFloat("attackRange"))
             animator.SetBool("isChasing", true);
     }
 
