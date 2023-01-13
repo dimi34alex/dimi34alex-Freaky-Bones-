@@ -5,11 +5,14 @@ using UnityEngine.AI;
 
 public class PatrolBehaviour : StateMachineBehaviour
 {
+    float timer;
     List<Transform> points = new();
     NavMeshAgent agent;
     Transform player;
+    IdleBehaviour ib;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        timer = 0;
         Transform pointsObject = GameObject.FindGameObjectWithTag("PointPatrol").transform;
         foreach (Transform t in pointsObject)
             points.Add(t);
@@ -25,7 +28,7 @@ public class PatrolBehaviour : StateMachineBehaviour
             agent.SetDestination(points[Random.Range(0, points.Count)].position);
         float distanse = Vector3.Distance(animator.transform.position, player.position);
 
-        if (distanse < animator.GetFloat("chaseRange"))
+        if (distanse < ib.chaseRange)
             animator.SetBool("isChasing", true);
     }
 
