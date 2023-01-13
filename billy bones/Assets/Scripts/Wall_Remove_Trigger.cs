@@ -22,14 +22,48 @@ public class Wall_Remove_Trigger : MonoBehaviour
         {
             Hand_in_Room = true;
         }
-        if(other.tag == "Player" || other.tag == "Hand")
-        {
-            wall1.SetActive(false);
-            WALL1.SetActive(true);
-            wall2.SetActive(false);
-            WALL2.SetActive(true);
-        }
+
     }
+
+     void OnTriggerStay(Collider other)
+     {
+        if(other.tag == "Player")
+        {
+            if(Camera1.GetComponent<CameraTeleport>().SwitchView == true)
+            {
+                Deactivate_Walls();
+            }
+            if(Camera1.GetComponent<CameraTeleport>().SwitchView == false)
+            {
+                Activate_Walls();
+            }
+        }
+
+        if(other.tag == "Hand")
+        {
+            if(Camera1.GetComponent<CameraTeleport>().SwitchView == false)
+            {
+                Deactivate_Walls();
+            }
+            if(Camera1.GetComponent<CameraTeleport>().SwitchView == true)
+            {
+                Activate_Walls();
+            }
+        }
+        else if(other.tag == "Hand" && Camera1.GetComponent<CameraTeleport>().SwitchView == false)
+        {
+            Deactivate_Walls();
+        }
+
+        if (other.tag == "Hand" && Camera1.GetComponent<CameraTeleport>().SwitchView == true)
+        {
+            Activate_Walls();
+        }
+        else if (other.tag == "Player" && Camera1.GetComponent<CameraTeleport>().SwitchView == false)
+        {
+            Activate_Walls();
+        }
+     }
 
 
     void OnTriggerExit (Collider other)
@@ -44,10 +78,21 @@ public class Wall_Remove_Trigger : MonoBehaviour
         }
         if(Player_in_Room == false && Hand_in_Room == false)
         {
+            Activate_Walls();
+        }
+    }
+    void Activate_Walls()
+    {
             wall1.SetActive(true);
             WALL1.SetActive(false);
             wall2.SetActive(true);
             WALL2.SetActive(false);
-        }
+    }
+    void Deactivate_Walls()
+    {
+            wall1.SetActive(false);
+            WALL1.SetActive(true);
+            wall2.SetActive(false);
+            WALL2.SetActive(true);
     }
 }
