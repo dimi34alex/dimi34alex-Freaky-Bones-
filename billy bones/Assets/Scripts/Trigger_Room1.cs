@@ -10,23 +10,20 @@ public class Trigger_Room1 : MonoBehaviour
 
     void OnTriggerEnter (Collider other)
     {
+        if((other.tag == "Player"))
+        {
+            Player_in_Room = true;
+        }
+        if((other.tag == "Hand"))
+        {
+            Hand_in_Room = true;
+        }
         if(other.tag == "Player" || other.tag == "Hand")
         {
             potol.GetComponent<Darkness>().Dark();
         }
     }
 
-    void OnTriggerStay (Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            Player_in_Room = true;
-        }
-        if(other.tag == "Hand")
-        {
-            Hand_in_Room = true;
-        }
-    }
 
     void OnTriggerExit (Collider other)
     {
