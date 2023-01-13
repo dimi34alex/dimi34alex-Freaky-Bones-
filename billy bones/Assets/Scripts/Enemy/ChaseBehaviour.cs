@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class ChaseBehaviour : StateMachineBehaviour
 {
     NavMeshAgent agent;
-    IdleBehaviour ib;
     Transform player;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
