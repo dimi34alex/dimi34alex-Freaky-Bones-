@@ -34,7 +34,6 @@ public class Interactive : MonoBehaviour
         }
     }
 
-    public GameObject DIMON;
     private void Interact()
     {
         if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,interactivable))
@@ -45,7 +44,6 @@ public class Interactive : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.E))
                 {
                     _hit.transform.GetComponent<Richag1>().Open();
-                    DIMON.GetComponent<doorManager>().Open();
                 }
             }
         }

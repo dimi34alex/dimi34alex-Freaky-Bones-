@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Richag1 : MonoBehaviour
 {
-    private bool _RichOpened = true;
+    public GameObject Open_Door;
+    private bool _RichOpened = false;
     [SerializeField] private Animator _animator;
 
 
     public void Open()
     {
+        _RichOpened = true;
         _animator.SetBool("RichOpened",_RichOpened);
-        _RichOpened = !_RichOpened;
+        Open_Door.GetComponent<doorManager>().Open();
+
     }
     
 }
