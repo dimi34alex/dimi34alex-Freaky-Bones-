@@ -10,13 +10,17 @@ public class CameraTeleport : MonoBehaviour
     public bool SwitchView = true;
     public GameObject Player;
     public GameObject Hand;
+    public GameObject HandSpawn;
 
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            SwitchView = !SwitchView;
+            if (HandSpawn.GetComponent<PlayerRemove>().HasHand == false)
+            {
+                SwitchView = !SwitchView;
+            }
         }
 
         if(SwitchView == true)

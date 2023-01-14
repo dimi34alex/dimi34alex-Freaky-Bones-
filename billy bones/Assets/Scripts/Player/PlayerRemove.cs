@@ -8,6 +8,7 @@ public class PlayerRemove : MonoBehaviour
     public GameObject PlayerYesHand;
     public GameObject PlayerNoHand;
     public bool HasHand = true;
+    public bool firstTime = true;
 
     public GameObject RealHand;
     public GameObject LeftHand;
@@ -38,6 +39,8 @@ public class PlayerRemove : MonoBehaviour
             PlayerYesHand.transform.position = new Vector3(PlayerNoHand.transform.position.x, PlayerNoHand.transform.position.y + 0.005525f,PlayerNoHand.transform.position.z);
             PlayerYesHand.transform.rotation = PlayerNoHand.transform.rotation;
         }
+
+        //if(PlayerNoHand.GetComponent<Things_Trigger>().CanUse2 == true)
         if(Input.GetKeyDown(KeyCode.R))
         {
             HasHand = !HasHand;
@@ -50,7 +53,7 @@ public class PlayerRemove : MonoBehaviour
                 PlayerYesHand.GetComponent<PlayerMove>().enabled = true;
                 PlayerYesHand.GetComponent<NavMeshAgent>().enabled = true;
                 PlayerYesHand.SetActive(true);
-
+                LeftHand.transform.position = transform.position;
             }
             else
             {
