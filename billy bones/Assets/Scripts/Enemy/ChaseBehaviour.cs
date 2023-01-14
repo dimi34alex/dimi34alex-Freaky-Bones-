@@ -22,7 +22,7 @@ public class ChaseBehaviour : StateMachineBehaviour
         if (distanse < animator.GetFloat("attackRange"))
             animator.SetBool("isAttacking", true);
         if (distanse > animator.GetFloat("chaseRange"))
-            animator.SetBool("isChasing", true);
+            animator.SetBool("isChasing", false);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
