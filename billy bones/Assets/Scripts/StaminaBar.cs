@@ -11,7 +11,7 @@ public class StaminaBar : MonoBehaviour
     public int resetStaminaValue = 2;
 
     private static int maxStamina = 100;
-    private int currentStamina = maxStamina;
+    public int currentStamina = maxStamina;
 
     public static StaminaBar instance;
 
