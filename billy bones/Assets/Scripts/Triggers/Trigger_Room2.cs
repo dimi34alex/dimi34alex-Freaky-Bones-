@@ -7,7 +7,7 @@ public class Trigger_Room2 : MonoBehaviour
     // Названия нужных объектов :
     // TriggerZone1 - триггер к которому этот скрипт привязан, найдешь в поиске
     // Darkness_Room1 - темная зона, её можно будет скопировать чтобы потом расставить как надо тебе и потом различным макаром затемнять
-    public GameObject potol1, potol2, potol3, potol4; // Для потолка который затемняется. Скопируй его с который есть
+    public GameObject potol1, potol4, potol5; // Для потолка который затемняется. Скопируй его с который есть
     public bool Player_in_Room = false; // Изначально эти объекты не находятся в том триггере к которому предназначен этот код(поэтому False),
     public bool Hand_in_Room = false; // но у тебя может быть другая ситуация
 
@@ -24,9 +24,8 @@ public class Trigger_Room2 : MonoBehaviour
         if(other.tag == "Player" || other.tag == "Hand") // Если хоть кто-то из двух сущностей есть в триггере
         {
             potol1.GetComponent<Darkness>().Dark(); // То запускаем анимацию прозрачности темной штучки, чтобы она плавно исчезла
-            potol2.GetComponent<Darkness>().Dark();
-            potol3.GetComponent<Darkness>().Dark();
             potol4.GetComponent<Darkness>().Dark();
+            potol5.GetComponent<Darkness>().Dark();
         }
     }
 
