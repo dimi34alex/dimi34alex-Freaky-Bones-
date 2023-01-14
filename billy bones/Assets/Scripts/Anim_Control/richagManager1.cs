@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Richag1 : MonoBehaviour
+public class richagManager1 : MonoBehaviour
 {
     public GameObject Open_Door;
     private bool _RichOpened = false;

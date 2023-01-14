@@ -38,12 +38,12 @@ public class Interactive : MonoBehaviour
     {
         if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,interactivable))
         {
-            if(_hit.transform != null && _hit.transform.GetComponent<Richag1>() && (_hit.transform.GetComponent<Things_Trigger>().CanUse1 == true || _hit.transform.GetComponent<Things_Trigger>().CanUse2 == true))
+            if(_hit.transform != null && _hit.transform.GetComponent<richagManager1>() && (_hit.transform.GetComponent<Things_Trigger>().CanUse1 == true || _hit.transform.GetComponent<Things_Trigger>().CanUse2 == true))
             {
                 Debug.DrawRay(_ray.origin, _ray.direction * _maxDistanceRay, Color.green);
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    _hit.transform.GetComponent<Richag1>().Open();
+                    _hit.transform.GetComponent<richagManager1>().Open();
                 }
             }
         }
