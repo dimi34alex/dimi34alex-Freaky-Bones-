@@ -43,7 +43,6 @@ public class PlayerMove : MonoBehaviour
             {
                 if (StaminaBar.instance.staminaBar.value >= 1)
                 {
-                    Debug.Log("������������");
                     if (timerStaminaRun >= costRunStamina)
                     {
                         StaminaBar.instance.UseStamina(1);
