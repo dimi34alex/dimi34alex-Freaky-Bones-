@@ -6,6 +6,11 @@ TagManager:
   tags:
   - ThingToPick
   - PointPatrol
+  - Hand
+  - Sword
+  - Key
+  - Stone
+  - Shvabra
   layers:
   - Default
   - TransparentFX

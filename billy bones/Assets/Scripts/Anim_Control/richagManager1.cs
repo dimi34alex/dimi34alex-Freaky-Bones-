@@ -14,7 +14,6 @@ public class richagManager1 : MonoBehaviour
         _RichOpened = true;
         _animator.SetBool("RichOpened",_RichOpened);
         Open_Door.GetComponent<doorManager>().Open();
-
     }
     
 }

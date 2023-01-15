@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DoorRoom1 : MonoBehaviour
+{
+    public GameObject Key;
+    public bool CanUse1 = false;
+    public bool CanUse2 = false;
+    void OnTriggerEnter (Collider other)
+    {
+        if(other.tag == "Player")
+        {
+           if(Key.GetComponent<Things_Trigger>().CanUse1 == true)
+           {
+                CanUse1 = true; 
+           } 
+        }
+        if(other.tag == "Hand")
+        {
+            if(Key.GetComponent<Things_Trigger>().CanUse2 == true)
+           {
+                CanUse2 = true; 
+           } 
+        }
+    }
+    void OnTriggerExit (Collider other)
+    {
+        if(other.tag == "Player")
+        {
+           CanUse1 = false; 
+        }
+        if(other.tag == "Hand")
+        {
+           CanUse2 = false; 
+        }
+    }
+}
