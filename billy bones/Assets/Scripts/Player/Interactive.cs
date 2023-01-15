@@ -3,22 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactive : MonoBehaviour
+
 {
+    public AudioSource playeraudio;
+    public AudioClip[] sounds;
+
     [SerializeField] private Camera _fpcCamera;
     private Ray _ray;
     private RaycastHit _hit;
 
     [SerializeField] private float _maxDistanceRay;
 
-    
+
     void Update()
     {
         Ray();
         DrawRay();
         Interact();
         OutLining();
-        if (Input.GetKeyDown(KeyCode.E)) Pick_Item();
-        if (Input.GetKeyDown(KeyCode.Q)) Drop();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Pick_Item();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Drop();
+            playeraudio.PlayOneShot(sounds[1]);
+        }
     }
 
     private void Ray()
@@ -85,6 +96,8 @@ public class Interactive : MonoBehaviour
                 current_Item.transform.localPosition = Vector3.zero;
                 current_Item.transform.localEulerAngles = new Vector3(172f,270f,93f);
                 canPickUp = true;
+
+                playeraudio.PlayOneShot(sounds[0]);
             }
         }
     }

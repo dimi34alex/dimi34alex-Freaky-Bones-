@@ -11,11 +11,14 @@ public class PlayerMove : MonoBehaviour
     float timerStaminaRun = 0.0f;
     private Animator anim;
     public GameObject Camera1;
+    public AudioClip[] footsteps;
+    AudioSource playeraudio;
 
     void Start()
     {
         myAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        playeraudio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -28,7 +31,7 @@ public class PlayerMove : MonoBehaviour
             if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn))
             {
                 myAgent.enabled = true;
-                myAgent.speed = 5;
+                myAgent.speed = 3;
                 myAgent.acceleration = 1000;
                 myAgent.SetDestination(hitInfo.point);
                 anim.SetBool("IsRunning", true);
@@ -39,6 +42,7 @@ public class PlayerMove : MonoBehaviour
 
             Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
+
             if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn))
             {
                 if (StaminaBar.instance.staminaBar.value >= 1)
@@ -48,7 +52,7 @@ public class PlayerMove : MonoBehaviour
                         StaminaBar.instance.UseStamina(1);
                         timerStaminaRun = 0.0f;
                     }
-                    myAgent.speed = 10;
+                    myAgent.speed = 6;
                     timerStaminaRun += Time.fixedDeltaTime;
                     myAgent.enabled = true;
                     myAgent.acceleration = 1000;
@@ -63,5 +67,12 @@ public class PlayerMove : MonoBehaviour
             myAgent.enabled = false;
             anim.SetBool("IsRunning", false);
         }
+    }
+
+    void Footstep()
+    {
+        int randInd = Random.Range(0, footsteps.Length);
+
+        playeraudio.PlayOneShot(footsteps[randInd]);
     }
 }
