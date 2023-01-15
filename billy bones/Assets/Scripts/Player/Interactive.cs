@@ -102,11 +102,20 @@ public class Interactive : MonoBehaviour
 
                     if(Input.GetKeyDown(KeyCode.E))
                     {
-                        SceneManager.LoadScene("StartMenu");
+                        Died.SetActive(true);
+                        Invoke("StartMenu_Loading", 3f);
                     }
                 }
             }
         }
+    }
+
+    public GameObject Died;
+
+    private void StartMenu_Loading()
+    {
+        SceneManager.LoadScene("StartMenu");
+        Died.SetActive(false);
     }
 
 

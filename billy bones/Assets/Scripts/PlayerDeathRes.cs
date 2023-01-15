@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerDeathRes : MonoBehaviour
 {
-    public GameObject spawnPoint;
+    public GameObject spawnPoint, Dead;
     
     public bool isDeath = false;
     //public Button button;
@@ -30,11 +30,13 @@ public class PlayerDeathRes : MonoBehaviour
         if (isDeath == true)
         {
             timer -= Time.fixedDeltaTime;
+            Dead.SetActive(true);
             if (timer <= 0)
             {
                 transform.position = spawnPoint.transform.position;
                 isDeath = false;
                 timer = timerClone;
+                Dead.SetActive(false);
             }
         }
     }
