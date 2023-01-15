@@ -13,7 +13,7 @@ public class AttackBehaviour : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.LookAt(player, Vector3.one);
+        animator.transform.LookAt(player);
         float distanse = Vector3.Distance(animator.transform.position, player.position);
         if (distanse > animator.GetFloat("attackRange"))
             animator.SetBool("isAttacking", false);
