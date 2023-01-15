@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Interactive : MonoBehaviour
 
@@ -91,6 +92,17 @@ public class Interactive : MonoBehaviour
                         Shvabra.transform.localPosition = new Vector3(0.0424f,0.0016f,0f);
                         Shvabra.transform.localEulerAngles = new Vector3(0f,0f,90.834f);                            
                         _hit.transform.GetComponent<richagManager1>().Open();
+                    }
+                }
+            }
+            if(_hit.transform != null && _hit.transform.tag == "EXIT" && _hit.transform.GetComponent<Things_Trigger>().CanUse1)
+            {
+                if(_hit.transform.GetComponent<Things_Trigger>().CanUse1 == true)
+                {
+
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        SceneManager.LoadScene("StartMenu");
                     }
                 }
             }

@@ -11,6 +11,7 @@ TagManager:
   - Key
   - Stone
   - Shvabra
+  - EXIT
   layers:
   - Default
   - TransparentFX
