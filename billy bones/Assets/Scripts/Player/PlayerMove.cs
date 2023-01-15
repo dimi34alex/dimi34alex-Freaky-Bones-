@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
             if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn))
             {
                 myAgent.enabled = true;
-                myAgent.speed = 3;
+                myAgent.speed = 4;
                 myAgent.acceleration = 1000;
                 myAgent.SetDestination(hitInfo.point);
                 anim.SetBool("IsRunning", true);
@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviour
                         StaminaBar.instance.UseStamina(1);
                         timerStaminaRun = 0.0f;
                     }
-                    myAgent.speed = 6;
+                    myAgent.speed = 8;
                     timerStaminaRun += Time.fixedDeltaTime;
                     myAgent.enabled = true;
                     myAgent.acceleration = 1000;
