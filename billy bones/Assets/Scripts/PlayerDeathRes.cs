@@ -5,24 +5,37 @@ using UnityEngine.UI;
 
 public class PlayerDeathRes : MonoBehaviour
 {
-    public GameObject gameOver;
-    public Button button;
-    public PlayerDeathRes instance;
+    public GameObject spawnPoint;
+    
+    public bool isDeath = false;
+    //public Button button;
+    public static PlayerDeathRes gameOver;
+    [SerializeField] float timer = 3;
+    [SerializeField] float timerClone = 3;
     private void Awake()
     {
-        instance = this;
+        gameOver = this;
     }
     void Start()
     {
-        gameOver.SetActive(false);
+        
     }
 
     public void Death()
     {
-
+        isDeath = true;
     }
-    public void Respawn()
+    private void Update()
     {
-
+        if (isDeath == true)
+        {
+            timer -= Time.fixedDeltaTime;
+            if (timer <= 0)
+            {
+                transform.position = spawnPoint.transform.position;
+                isDeath = false;
+                timer = timerClone;
+            }
+        }
     }
 }
