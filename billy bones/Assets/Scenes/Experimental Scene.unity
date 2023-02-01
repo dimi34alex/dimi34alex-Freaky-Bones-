@@ -602,6 +602,11 @@ MonoBehaviour:
   whatCanBeClickedOn:
     serializedVersion: 2
     m_Bits: 64
+  footsteps:
+  - {fileID: 8300000, guid: df09d6aa433ebe846a984a487ce41047, type: 3}
+  - {fileID: 8300000, guid: b9d8f6384de7b194fbdf8eb41cc3d39b, type: 3}
+  - {fileID: 8300000, guid: 49ee7ef035d83e84bb1803501062ef6c, type: 3}
+  - {fileID: 8300000, guid: bbb0050a4ec37c94b8be88d0ffe018da, type: 3}
 --- !u!54 &2125230916
 Rigidbody:
   m_ObjectHideFlags: 0
