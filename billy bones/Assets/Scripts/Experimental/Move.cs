@@ -12,6 +12,8 @@ public class Move : MonoBehaviour
     private Animator anim;
     public AudioClip[] footsteps;
     AudioSource playeraudio;
+    Rigidbody _rb;
+    Vector3 directionOfMouve;
 
 
     void Start()
@@ -20,10 +22,12 @@ public class Move : MonoBehaviour
         planecollider = GameObject.Find("Plane").GetComponent<Collider>();
         anim = GetComponent<Animator>();
         playeraudio = GetComponent<AudioSource>();
+        _rb = GetComponent<Rigidbody>();
+        directionOfMouve = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         ray = cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
@@ -33,22 +37,20 @@ public class Move : MonoBehaviour
 
 
          //transform.position = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,5));
-         if(Input.GetMouseButton(0))
-         {         
+        if(Input.GetMouseButton(0))
+        {         
             ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
             {
-                if(hit.collider == planecollider)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, hit.point,Time.deltaTime*5);
-                    anim.SetBool("IsRunning", true);
-                }        
+                transform.position = Vector3.MoveTowards(transform.position, hit.point,Time.fixedDeltaTime*5);
+                anim.SetBool("IsRunning", true);       
             }
-            else
-            {
-                anim.SetBool("IsRunning", false);
-            }   
-         }
+        }
+        else
+        {
+            anim.SetBool("IsRunning", false);
+        }   
+    
     }
     void Footstep()
     {
