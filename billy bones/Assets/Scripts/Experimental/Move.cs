@@ -15,6 +15,10 @@ public class Move : MonoBehaviour
     Rigidbody _rb;
     Vector3 directionOfMouve;
 
+    public Transform Player;
+    Vector3 newDirection;
+    
+
 
     void Start()
     {
@@ -30,10 +34,10 @@ public class Move : MonoBehaviour
     void FixedUpdate()
     {
         ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
-        {
-            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));     
-        }  
+        //if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
+        //{
+            //transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));     
+        //}  
 
 
          //transform.position = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,5));
@@ -42,6 +46,10 @@ public class Move : MonoBehaviour
             ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
             {
+
+                newDirection = Vector3.RotateTowards(transform.forward, hit.point - transform.position,0.1f,10);
+                transform.rotation = Quaternion.LookRotation(newDirection);
+
                 transform.position = Vector3.MoveTowards(transform.position, hit.point,Time.fixedDeltaTime*5);
                 anim.SetBool("IsRunning", true);       
             }
