@@ -1,48 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Trigger_Room2 : MonoBehaviour
 {
-    // Названия нужных объектов :
-    // TriggerZone1 - триггер к которому этот скрипт привязан, найдешь в поиске
-    // Darkness_Room1 - темная зона, её можно будет скопировать чтобы потом расставить как надо тебе и потом различным макаром затемнять
-    public GameObject potol1, potol4, potol5; // Для потолка который затемняется. Скопируй его с который есть
-    public bool Player_in_Room = false; // Изначально эти объекты не находятся в том триггере к которому предназначен этот код(поэтому False),
-    public bool Hand_in_Room = false; // но у тебя может быть другая ситуация
+    public GameObject potol1, potol4, potol5, back;
+    public TextMeshPro textMeshPro;
+    public bool Player_in_Room = false;
+    public bool Hand_in_Room = false;
 
-    void OnTriggerEnter (Collider other) //Функция первичного входа объекта other
+    public void Setup(string text)
     {
-        if((other.tag == "Player")) // Если ТЭГ объекта other это Player
+        textMeshPro.SetText(text);
+        textMeshPro.ForceMeshUpdate();
+    }
+
+    void OnTriggerEnter (Collider other)
+    {
+        if((other.tag == "Player"))
         {
-            Player_in_Room = true; // Игрок в комнате = ИСТИНА
+            Player_in_Room = true;
         }
-        if((other.tag == "Hand")) // Если ТЭГ объекта other это Hand, т.е. если рука зашла в триггер зону
+        if((other.tag == "Hand"))
         {
-            Hand_in_Room = true; // Рука в триггер зоне = ИСТИНА
+            Hand_in_Room = true;
         }
-        if(other.tag == "Player" || other.tag == "Hand") // Если хоть кто-то из двух сущностей есть в триггере
+        if(other.tag == "Player" || other.tag == "Hand")
         {
-            potol1.GetComponent<Darkness>().Dark(); // То запускаем анимацию прозрачности темной штучки, чтобы она плавно исчезла
+            potol1.GetComponent<Darkness>().Dark();
             potol4.GetComponent<Darkness>().Dark();
             potol5.GetComponent<Darkness>().Dark();
+            Setup("R - Drop/Take hand"); ;
+            back.SetActive(true);
         }
     }
 
 
-/*    void OnTriggerExit (Collider other)
+    void OnTriggerExit (Collider other)
     {
-        if((other.tag == "Player")) // если скелеток вышел из триггера
+        back.SetActive(false);
+        /*if((other.tag == "Player"))
         {
-            Player_in_Room = false; // Скелетон в комнате = ЛОЖЬ
+            Player_in_Room = false;
         }
-        if((other.tag == "Hand")) // если рука вышла из триггера 
+        if((other.tag == "Hand"))
         {
-            Hand_in_Room = false; // рука в комнате ЛОЖЬ
+            Hand_in_Room = false;
         }
-        if(Player_in_Room == false && Hand_in_Room == false) // если оба объекта НЕ находятся в триггере
+        if(Player_in_Room == false && Hand_in_Room == false)
         {
-            potol.GetComponent<Darkness>().DeDark(); // Затемняем зону
-        }
-    }*/
+            potol.GetComponent<Darkness>().DeDark();
+        }*/
+    }
 }

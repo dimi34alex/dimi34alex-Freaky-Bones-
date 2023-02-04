@@ -1,41 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DialogTrigger : MonoBehaviour
 {
-    public GameObject P1, P2, P3, P4, T1, T2, T3;
+    public GameObject dialog;
     public int x1, x2, count = 0;
     public float time;
 
+    public SpriteRenderer backgroundSprite;
+    public TextMeshPro textMeshPro;
+
+    public void Setup(string text)
+    {
+        textMeshPro.SetText(text);
+        textMeshPro.ForceMeshUpdate();
+    }
+
     void OnTriggerEnter()
     {
-        x1 = Random.Range(1, 5);
+        dialog.SetActive(true);
+        x1 = Random.Range(1, 4);
         switch(x1)
         {
             case 1:
-                P1.SetActive(true);
-                P2.SetActive(false);
-                P3.SetActive(false);
-                P4.SetActive(false);
+                Setup("Эй, парень! Подожди!");
                 break;
             case 2:
-                P1.SetActive(false);
-                P2.SetActive(true);
-                P3.SetActive(false);
-                P4.SetActive(false);
+                Setup("Друже! Постой!");
                 break;
             case 3:
-                P1.SetActive(false);
-                P2.SetActive(false);
-                P3.SetActive(true);
-                P4.SetActive(false);
+                Setup("Брат по смерти, выслушай!");
                 break;
             case 4:
-                P1.SetActive(false);
-                P2.SetActive(false);
-                P3.SetActive(false);
-                P4.SetActive(true);
+                Setup("Эй БЛЯ УРОД СУКА ГНИДА");
                 break;
             default:
                 break;
@@ -46,31 +45,26 @@ public class DialogTrigger : MonoBehaviour
     {
         if (count == 0)
         {
-            x2 = Random.Range(1, 4);
-            Invoke("Choice", 4f);
             count = 1;
+            Invoke("Choice", 3f);
         }
     }
 
     void Choice()
     {
-        P1.SetActive(false);
-        P2.SetActive(false);
-        P3.SetActive(false);
-        P4.SetActive(false);
-
+        x2 = Random.Range(1, 3);
         switch (x2)
         {
             case 1:
-                T1.SetActive(true);
+                Setup("Те, кто строили эту темницу, явно ничего не смыслили в архитектуре. Взять хотя бы тот неровный каменный столп. Из него же торчит камень! КАМЕНЬ! Из каменного столба! Зачем там камень?! Ха-ха-ха!");
                 Invoke("PanelOff", 15f);
                 break;
             case 2:
-                T2.SetActive(true);
+                Setup("Знаешь, на твоем месте я бы не стал общаться с тем парнем с оружием в руках, в зале, полном трупов. Я эмпат, и мне кажется, от него веет негативной энергетикой");
                 Invoke("PanelOff", 10f);
                 break;
             case 3:
-                T3.SetActive(true);
+                Setup("Иногда думаю о том, как было бы славно если бы нашу с тобой историю увековечили какие-нибудь консерваторы, а на экзамене за нее поставили бы высший балл. История про скелетов, черт возьми! Ну и чушь!");
                 Invoke("PanelOff", 14f);
                 break;
         }
@@ -78,19 +72,14 @@ public class DialogTrigger : MonoBehaviour
 
     void PanelOff()
     {
-        T1.SetActive(false);
-        T2.SetActive(false);
-        T3.SetActive(false);
+        dialog.SetActive(false);
     }
 
     void OnTriggerExit()
     {
         x1 = x2 = 0;
         count = 0;
-        P1.SetActive(false);
-        P2.SetActive(false);
-        P3.SetActive(false);
-        P4.SetActive(false);
-        PanelOff();
+        dialog.SetActive(false);
+/*        PanelOff();*/
     }
 }
