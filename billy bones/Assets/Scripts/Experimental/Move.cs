@@ -47,7 +47,7 @@ public class Move : MonoBehaviour
             if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
             {
 
-                newDirection = Vector3.RotateTowards(transform.forward, hit.point - transform.position,0.1f,10);
+                newDirection = Vector3.RotateTowards(transform.forward, new Vector3(hit.point.x - transform.position.x,0f,hit.point.z - transform.position.z),0.15f,10);
                 transform.rotation = Quaternion.LookRotation(newDirection);
 
                 transform.position = Vector3.MoveTowards(transform.position, hit.point,Time.fixedDeltaTime*5);

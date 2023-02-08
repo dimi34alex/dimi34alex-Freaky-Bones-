@@ -16,6 +16,13 @@ public class Interactive : MonoBehaviour
     [SerializeField] private float _maxDistanceRay;
 
 
+    private Animator anim;
+
+    void Start()
+    {
+        anim = Player1.GetComponent<Animator>();
+    }
+
     void Update()
     {
         Ray();
@@ -30,6 +37,15 @@ public class Interactive : MonoBehaviour
         {
             Drop();
             playeraudio.PlayOneShot(sounds[1]);
+        }
+        if (Input.GetMouseButton(1))
+        {
+            Zamah();
+        }
+        else if(Input.GetMouseButton(1) == false)
+        {
+            anim.SetBool("ZamahTime", false);
+            Player1.GetComponent<Move>().enabled = true;
         }
     }
 
@@ -147,12 +163,13 @@ public class Interactive : MonoBehaviour
     {
         if(Physics.Raycast(_ray, out _hit,_maxDistanceRay,item))
         {
-            if((_hit.transform.tag == "Sword" || _hit.transform.tag == "Key" || _hit.transform.tag == "Shvabra" || _hit.transform.tag == "Stone" ) && _hit.transform.GetComponent<Things_Trigger>().CanUse1 == true && GetComponent<CameraTeleport>().SwitchView == true)
+            if((_hit.transform.tag == "Sword" || _hit.transform.tag == "Key" || _hit.transform.tag == "Shvabra" || _hit.transform.tag == "Stone" ) && _hit.transform.GetComponent<Things_Trigger>().CanUse1 == true) //&& GetComponent<CameraTeleport>().SwitchView == true)
             {
                 if(_hit.transform.tag == "Sword")
                 {
                     if(PlayerCanPick) Drop();
                     player_item = _hit.transform.gameObject;
+                    player_item.GetComponent<Collider>().enabled = false;
                     player_item.GetComponent<Rigidbody>().isKinematic = true;
                     player_item.transform.parent = hand.transform;
                     player_item.transform.localPosition = Vector3.zero;
@@ -163,6 +180,7 @@ public class Interactive : MonoBehaviour
                 {
                     if(PlayerCanPick) Drop();
                     player_item = _hit.transform.gameObject;
+                    player_item.GetComponent<Collider>().enabled = false;
                     player_item.GetComponent<Rigidbody>().isKinematic = true;
                     player_item.transform.parent = hand.transform;
                     player_item.transform.localPosition = Vector3.zero;
@@ -173,6 +191,7 @@ public class Interactive : MonoBehaviour
                 {
                     if(PlayerCanPick) Drop();
                     player_item = _hit.transform.gameObject;
+                    player_item.GetComponent<Collider>().enabled = false;
                     player_item.GetComponent<Rigidbody>().isKinematic = true;
                     player_item.transform.parent = hand.transform;
                     player_item.transform.localPosition = Vector3.zero;
@@ -183,10 +202,12 @@ public class Interactive : MonoBehaviour
                 {
                     if(PlayerCanPick) Drop();
                     player_item = _hit.transform.gameObject;
+                    player_item.GetComponent<Collider>().enabled = false;
                     player_item.GetComponent<Rigidbody>().isKinematic = true;
+                    player_item.GetComponent<Collider>().enabled = false;
                     player_item.transform.parent = hand.transform;
-                    player_item.transform.localPosition = new Vector3(-0.082f,0.009f,0.029f);
-                    player_item.transform.localEulerAngles = new Vector3(172f,270f,93f);
+                    player_item.transform.localPosition = new Vector3(0f,0f,0f);
+                    player_item.transform.localEulerAngles = new Vector3(0f,0f,0f);
                     PlayerCanPick = true;                    
                 }
 
@@ -227,6 +248,7 @@ public class Interactive : MonoBehaviour
         if(GetComponent<CameraTeleport>().SwitchView == true)
         {
             player_item.transform.parent = null;
+            player_item.GetComponent<Collider>().enabled = true;
             player_item.GetComponent<Rigidbody>().isKinematic = false;
             PlayerCanPick = false;
             player_item = null;            
@@ -234,9 +256,76 @@ public class Interactive : MonoBehaviour
         if(GetComponent<CameraTeleport>().SwitchView == false)
         {
             hand_item.transform.parent = null;
+            hand_item.GetComponent<Collider>().enabled = true;
             hand_item.GetComponent<Rigidbody>().isKinematic = false;
             HandCanPick = false;
             hand_item = null;            
         }
+    }
+
+
+    public float AngleInDegrees;
+    float g = Physics.gravity.y;
+    public GameObject Player1;
+    public Transform Target;
+    public LayerMask whatCanBeClickedOn;
+    public GameObject Bullet;
+    Vector3 newDirection;
+
+    void Zamah()
+    {
+        if(player_item != null)
+        {
+            Player1.GetComponent<Move>().enabled = false;
+            if (Physics.Raycast(_ray, out _hit,500, whatCanBeClickedOn))
+            {
+                newDirection = Vector3.RotateTowards(Player1.transform.forward, new Vector3(_hit.point.x - Player1.transform.position.x,0f,_hit.point.z - Player1.transform.position.z),0.15f,10);
+                Player1.transform.rotation = Quaternion.LookRotation(newDirection);
+                anim.SetBool("ZamahTime", true);
+                if(Input.GetMouseButtonDown(0))
+                {
+                    Throw();
+                }
+            }
+        }
+    }
+    
+    void Throw()
+    {
+        if( player_item != null)
+        {
+            if (Physics.Raycast(_ray, out _hit,500, whatCanBeClickedOn))
+            {
+                //hand.transform.localEulerAngles = new Vector3(-AngleInDegrees,0f,0f);
+                Vector3 fromTo = _hit.point - hand.transform.position;
+                Vector3 fromToXZ = new Vector3(fromTo.x,0f,fromTo.z);
+                
+                hand.transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
+
+                hand.transform.eulerAngles = new Vector3(-AngleInDegrees,hand.transform.eulerAngles.y,hand.transform.eulerAngles.z);
+                    //Player1.transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
+                float x = fromToXZ.magnitude;
+                float y = fromTo.y;
+
+                float AngleRadians = AngleInDegrees * Mathf.PI / 180;
+
+                float v2 = (g * x * x) / (2 * (y - Mathf.Tan(AngleRadians) * x ) * Mathf.Pow(Mathf.Cos(AngleRadians), 2 ));
+
+                float v = Mathf.Sqrt(Mathf.Abs(v2));
+
+
+                //GameObject newBullet = Instantiate( Bullet, hand.transform.position, Quaternion.identity);
+                //newBullet.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
+                player_item.transform.parent = null;
+                player_item.GetComponent<Rigidbody>().isKinematic = false;
+                player_item.GetComponent<Collider>().enabled = true;
+                player_item.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
+                PlayerCanPick = false;
+                player_item = null;
+                anim.SetBool("ZamahTime", false);
+                anim.SetTrigger("Throws");
+            } 
+        }      
+
     }
 }
