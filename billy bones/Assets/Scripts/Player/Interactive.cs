@@ -269,6 +269,7 @@ public class Interactive : MonoBehaviour
     public GameObject Player1;
     public Transform Target;
     public LayerMask whatCanBeClickedOn;
+    public LayerMask whereCanBeThrown;
     public GameObject Bullet;
     Vector3 newDirection;
 
@@ -276,34 +277,37 @@ public class Interactive : MonoBehaviour
     {
         if(player_item != null)
         {
+            anim.SetBool("Throws",false);
             Player1.GetComponent<Move>().enabled = false;
-            if (Physics.Raycast(_ray, out _hit,500, whatCanBeClickedOn))
+            if (Physics.Raycast(_ray, out _hit,500, whereCanBeThrown))
             {
                 newDirection = Vector3.RotateTowards(Player1.transform.forward, new Vector3(_hit.point.x - Player1.transform.position.x,0f,_hit.point.z - Player1.transform.position.z),0.15f,10);
                 Player1.transform.rotation = Quaternion.LookRotation(newDirection);
                 anim.SetBool("ZamahTime", true);
                 if(Input.GetMouseButtonDown(0))
                 {
+                    anim.SetBool("Throws",true);
+                    anim.SetBool("ZamahTime", false);
                     Throw();
+                    
                 }
             }
         }
     }
-    
+
     void Throw()
     {
         if( player_item != null)
         {
-            if (Physics.Raycast(_ray, out _hit,500, whatCanBeClickedOn))
+            if (Physics.Raycast(_ray, out _hit,500, whereCanBeThrown))
             {
-                //hand.transform.localEulerAngles = new Vector3(-AngleInDegrees,0f,0f);
                 Vector3 fromTo = _hit.point - hand.transform.position;
                 Vector3 fromToXZ = new Vector3(fromTo.x,0f,fromTo.z);
                 
                 hand.transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
 
                 hand.transform.eulerAngles = new Vector3(-AngleInDegrees,hand.transform.eulerAngles.y,hand.transform.eulerAngles.z);
-                    //Player1.transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
+
                 float x = fromToXZ.magnitude;
                 float y = fromTo.y;
 
@@ -314,18 +318,14 @@ public class Interactive : MonoBehaviour
                 float v = Mathf.Sqrt(Mathf.Abs(v2));
 
 
-                //GameObject newBullet = Instantiate( Bullet, hand.transform.position, Quaternion.identity);
-                //newBullet.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
                 player_item.transform.parent = null;
                 player_item.GetComponent<Rigidbody>().isKinematic = false;
                 player_item.GetComponent<Collider>().enabled = true;
                 player_item.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
                 PlayerCanPick = false;
                 player_item = null;
-                anim.SetBool("ZamahTime", false);
-                anim.SetTrigger("Throws");
             } 
-        }      
+        }     
 
     }
 }
