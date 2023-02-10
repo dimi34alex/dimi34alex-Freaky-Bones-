@@ -41,9 +41,12 @@ public class Interactive : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             Zamah();
+            
         }
         else if(Input.GetMouseButton(1) == false)
         {
+            ChangeAngle = 30;
+            Trajectory.gameObject.SetActive(false);
             anim.SetBool("ZamahTime", false);
             Player1.GetComponent<Move>().enabled = true;
         }
@@ -273,59 +276,102 @@ public class Interactive : MonoBehaviour
     public GameObject Bullet;
     Vector3 newDirection;
 
+
+    public float ChangeAngle = 30;
+
+    public TrajectoryRenderer Trajectory;
     void Zamah()
     {
         if(player_item != null)
         {
+            Trajectory.gameObject.SetActive(true);
             anim.SetBool("Throws",false);
             Player1.GetComponent<Move>().enabled = false;
             if (Physics.Raycast(_ray, out _hit,500, whereCanBeThrown))
             {
                 newDirection = Vector3.RotateTowards(Player1.transform.forward, new Vector3(_hit.point.x - Player1.transform.position.x,0f,_hit.point.z - Player1.transform.position.z),0.15f,10);
-                Player1.transform.rotation = Quaternion.LookRotation(newDirection);
+                Player1.transform.rotation = Quaternion.LookRotation(newDirection);                
                 anim.SetBool("ZamahTime", true);
-                if(Input.GetMouseButtonDown(0))
-                {
-                    anim.SetBool("Throws",true);
-                    anim.SetBool("ZamahTime", false);
-                    Throw();
-                    
-                }
-            }
-        }
-    }
 
-    void Throw()
-    {
-        if( player_item != null)
-        {
-            if (Physics.Raycast(_ray, out _hit,500, whereCanBeThrown))
-            {
                 Vector3 fromTo = _hit.point - hand.transform.position;
+                hand.transform.rotation = Quaternion.LookRotation(fromTo, Vector3.up);
+                AngleInDegrees = (360 - hand.transform.eulerAngles.x)+ChangeAngle;
                 Vector3 fromToXZ = new Vector3(fromTo.x,0f,fromTo.z);
-                
                 hand.transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
-
                 hand.transform.eulerAngles = new Vector3(-AngleInDegrees,hand.transform.eulerAngles.y,hand.transform.eulerAngles.z);
 
                 float x = fromToXZ.magnitude;
                 float y = fromTo.y;
-
                 float AngleRadians = AngleInDegrees * Mathf.PI / 180;
-
                 float v2 = (g * x * x) / (2 * (y - Mathf.Tan(AngleRadians) * x ) * Mathf.Pow(Mathf.Cos(AngleRadians), 2 ));
-
                 float v = Mathf.Sqrt(Mathf.Abs(v2));
 
+                Vector3 speed = (_hit.point - hand.transform.position)*v;
+                Trajectory.ShowTrajectory(hand.transform.position, hand.transform.forward * v); 
 
-                player_item.transform.parent = null;
-                player_item.GetComponent<Rigidbody>().isKinematic = false;
-                player_item.GetComponent<Collider>().enabled = true;
-                player_item.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
-                PlayerCanPick = false;
-                player_item = null;
-            } 
-        }     
-
+                if(Input.GetMouseButton(0))
+                {
+                    if( ChangeAngle > 5)
+                    {
+                        ChangeAngle -= 10 * Time.deltaTime;
+                    }                         
+                }
+                if(Input.GetMouseButtonUp(0))
+                {
+                    ChangeAngle = 30;
+                    Trajectory.gameObject.SetActive(false);
+                    anim.SetBool("Throws",true);
+                    anim.SetBool("ZamahTime", false);
+                    player_item.transform.parent = null;
+                    player_item.GetComponent<Rigidbody>().isKinematic = false;
+                    player_item.GetComponent<Collider>().enabled = true;
+                    player_item.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
+                    PlayerCanPick = false;
+                    player_item = null;
+                }                
+            }
+        }
     }
+
+
+    // void Throw()
+    // {
+    //     if( player_item != null)
+    //     {
+    //         if (Physics.Raycast(_ray, out _hit,500, whereCanBeThrown))
+    //         {
+    //             Vector3 fromTo = _hit.point - hand.transform.position;
+
+    //             hand.transform.rotation = Quaternion.LookRotation(fromTo, Vector3.up);
+    //             AngleInDegrees = (360 - hand.transform.eulerAngles.x)+25;
+
+    //             Vector3 fromToXZ = new Vector3(fromTo.x,0f,fromTo.z);
+                
+    //             hand.transform.rotation = Quaternion.LookRotation(fromToXZ, Vector3.up);
+                
+
+
+    //             hand.transform.eulerAngles = new Vector3(-AngleInDegrees,hand.transform.eulerAngles.y,hand.transform.eulerAngles.z);
+
+
+    //             float x = fromToXZ.magnitude;
+    //             float y = fromTo.y;
+
+    //             float AngleRadians = AngleInDegrees * Mathf.PI / 180;
+
+    //             float v2 = (g * x * x) / (2 * (y - Mathf.Tan(AngleRadians) * x ) * Mathf.Pow(Mathf.Cos(AngleRadians), 2 ));
+
+    //             float v = Mathf.Sqrt(Mathf.Abs(v2));
+
+
+    //             player_item.transform.parent = null;
+    //             player_item.GetComponent<Rigidbody>().isKinematic = false;
+    //             player_item.GetComponent<Collider>().enabled = true;
+    //             player_item.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
+    //             PlayerCanPick = false;
+    //             player_item = null;
+    //         } 
+    //     }     
+
+    // }
 }
