@@ -17,6 +17,16 @@ public class Move : MonoBehaviour
 
     public Transform Player;
     Vector3 newDirection;
+
+    private Animator BodyAnim;
+    private Animator HeadAnim;
+    private Animator LeftHandAnim;
+    private Animator RightHandAnim;
+
+    public GameObject Body;
+    public GameObject Head;
+    public GameObject LeftHand;
+    public GameObject RightHand;
     
 
 
@@ -24,7 +34,12 @@ public class Move : MonoBehaviour
     {
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         planecollider = GameObject.Find("Plane").GetComponent<Collider>();
-        anim = GetComponent<Animator>();
+
+        BodyAnim = Body.GetComponent<Animator>();
+        HeadAnim = Head.GetComponent<Animator>();
+        LeftHandAnim = LeftHand.GetComponent<Animator>();
+        RightHandAnim = RightHand.GetComponent<Animator>();
+
         playeraudio = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody>();
         directionOfMouve = new Vector3(0, 0, 0);
@@ -51,12 +66,18 @@ public class Move : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(newDirection);
 
                 transform.position = Vector3.MoveTowards(transform.position, hit.point,Time.fixedDeltaTime*5);
-                anim.SetBool("IsRunning", true);       
+                BodyAnim.SetBool("IsRunning", true);
+                HeadAnim.SetBool("IsRunning", true);
+                LeftHandAnim.SetBool("IsRunning", true);
+                RightHandAnim.SetBool("IsRunning", true);       
             }
         }
         else
         {
-            anim.SetBool("IsRunning", false);
+                BodyAnim.SetBool("IsRunning", false);
+                HeadAnim.SetBool("IsRunning", false);
+                LeftHandAnim.SetBool("IsRunning", false);
+                RightHandAnim.SetBool("IsRunning", false);  
         }   
     
     }

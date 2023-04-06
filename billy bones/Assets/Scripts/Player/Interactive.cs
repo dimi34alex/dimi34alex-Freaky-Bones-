@@ -16,11 +16,22 @@ public class Interactive : MonoBehaviour
     [SerializeField] private float _maxDistanceRay;
 
 
-    private Animator anim;
+    private Animator BodyAnim;
+    private Animator HeadAnim;
+    private Animator LeftHandAnim;
+    private Animator RightHandAnim;
+
+    public GameObject Body;
+    public GameObject Head;
+    public GameObject LeftHand;
+    public GameObject RightHand;
 
     void Start()
     {
-        anim = Player1.GetComponent<Animator>();
+        BodyAnim = Body.GetComponent<Animator>();
+        HeadAnim = Head.GetComponent<Animator>();
+        LeftHandAnim = LeftHand.GetComponent<Animator>();
+        RightHandAnim = RightHand.GetComponent<Animator>();
     }
 
     void Update()
@@ -47,7 +58,12 @@ public class Interactive : MonoBehaviour
         {
             ChangeAngle = 30;
             Trajectory.gameObject.SetActive(false);
-            anim.SetBool("ZamahTime", false);
+
+            BodyAnim.SetBool("ZamahTime", false);
+            HeadAnim.SetBool("ZamahTime", false);
+            LeftHandAnim.SetBool("ZamahTime", false);
+            RightHandAnim.SetBool("ZamahTime", false);
+
             Player1.GetComponent<Move>().enabled = true;
         }
     }
@@ -285,13 +301,22 @@ public class Interactive : MonoBehaviour
         if(player_item != null)
         {
             Trajectory.gameObject.SetActive(true);
-            anim.SetBool("Throws",false);
+
+            BodyAnim.SetBool("Throws",false);
+            HeadAnim.SetBool("Throws",false);
+            LeftHandAnim.SetBool("Throws",false);
+            RightHandAnim.SetBool("Throws",false);
+
             Player1.GetComponent<Move>().enabled = false;
             if (Physics.Raycast(_ray, out _hit,500, whereCanBeThrown))
             {
                 newDirection = Vector3.RotateTowards(Player1.transform.forward, new Vector3(_hit.point.x - Player1.transform.position.x,0f,_hit.point.z - Player1.transform.position.z),0.15f,10);
-                Player1.transform.rotation = Quaternion.LookRotation(newDirection);                
-                anim.SetBool("ZamahTime", true);
+                Player1.transform.rotation = Quaternion.LookRotation(newDirection);
+
+                BodyAnim.SetBool("ZamahTime", true);
+                HeadAnim.SetBool("ZamahTime", true);
+                LeftHandAnim.SetBool("ZamahTime", true);
+                RightHandAnim.SetBool("ZamahTime", true);
 
                 Vector3 fromTo = _hit.point - hand.transform.position;
                 hand.transform.rotation = Quaternion.LookRotation(fromTo, Vector3.up);
@@ -320,8 +345,17 @@ public class Interactive : MonoBehaviour
                 {
                     ChangeAngle = 30;
                     Trajectory.gameObject.SetActive(false);
-                    anim.SetBool("Throws",true);
-                    anim.SetBool("ZamahTime", false);
+
+                    BodyAnim.SetBool("Throws",true);
+                    HeadAnim.SetBool("Throws",true);
+                    LeftHandAnim.SetBool("Throws",true);
+                    RightHandAnim.SetBool("Throws",true);
+
+                    BodyAnim.SetBool("ZamahTime", false);
+                    HeadAnim.SetBool("ZamahTime", false);
+                    LeftHandAnim.SetBool("ZamahTime", false);
+                    RightHandAnim.SetBool("ZamahTime", false);
+
                     player_item.transform.parent = null;
                     player_item.GetComponent<Rigidbody>().isKinematic = false;
                     player_item.GetComponent<Collider>().enabled = true;
