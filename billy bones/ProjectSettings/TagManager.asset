@@ -12,6 +12,7 @@ TagManager:
   - Stone
   - Shvabra
   - EXIT
+  - Ground
   layers:
   - Default
   - TransparentFX
