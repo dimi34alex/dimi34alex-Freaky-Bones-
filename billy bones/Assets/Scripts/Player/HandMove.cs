@@ -6,10 +6,20 @@ using UnityEngine.AI;
 public class HandMove : MonoBehaviour
 {
     public LayerMask whatCanBeClickedOn;
-
-    private NavMeshAgent myAgent;
-
+    Camera cam;
+    Collider planecollider;
+    RaycastHit hit;
+    Ray ray;
     private Animator anim;
+    public AudioClip[] footsteps;
+    AudioSource playeraudio;
+
+
+
+    Vector3 newDirection;
+
+    private Animator HandAnim;
+
 
     public GameObject Hand;
 
@@ -18,34 +28,37 @@ public class HandMove : MonoBehaviour
 
     void Start()
     {
-        myAgent = GetComponent<NavMeshAgent>();
-        anim = Hand.GetComponent<Animator>();
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+
+        HandAnim = Hand.GetComponent<Animator>();;
+
+        playeraudio = GetComponent<AudioSource>();
+
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
+        ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButton(0) && Camera1.GetComponent<CameraTeleport>().SwitchView == false)
-        {
-            Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
-
-            if(Physics.Raycast(myRay, out hitInfo,100, whatCanBeClickedOn))
+        if(Input.GetMouseButton(0) && Camera1.GetComponent<CameraTeleport>().SwitchView == false)
+        {         
+            ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
             {
-                myAgent.enabled = true;
-                myAgent.speed = 3;
-                myAgent.acceleration = 1000;
-                myAgent.SetDestination(hitInfo.point);
-                anim.SetBool("IsRunning", true);
-            } 
+
+                newDirection = Vector3.RotateTowards(transform.forward, new Vector3(hit.point.x - transform.position.x,0f,hit.point.z - transform.position.z),0.15f,5);
+                transform.rotation = Quaternion.LookRotation(newDirection);
+
+                transform.position = Vector3.MoveTowards(transform.position, hit.point,Time.fixedDeltaTime*3);
+                HandAnim.SetBool("IsRunning", true);      
+            }
         }
         else
         {
-           myAgent.speed = 0;
-           myAgent.enabled = false;
-           anim.SetBool("IsRunning", false);
-        }
+                HandAnim.SetBool("IsRunning", false);
 
-
+        }   
+    
     }
 }

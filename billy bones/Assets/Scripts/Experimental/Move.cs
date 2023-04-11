@@ -27,6 +27,7 @@ public class Move : MonoBehaviour
     public GameObject Head;
     public GameObject LeftHand;
     public GameObject RightHand;
+    public GameObject Camera1;
     
 
 
@@ -45,18 +46,12 @@ public class Move : MonoBehaviour
         directionOfMouve = new Vector3(0, 0, 0);
     }
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         ray = cam.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
-        //{
-            //transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));     
-        //}  
 
-
-         //transform.position = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,5));
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && Camera1.GetComponent<CameraTeleport>().SwitchView == true)
         {         
             ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))
