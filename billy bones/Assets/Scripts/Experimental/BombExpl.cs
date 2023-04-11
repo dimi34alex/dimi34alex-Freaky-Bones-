@@ -8,14 +8,16 @@ public class BombExpl : MonoBehaviour
     public GameObject explosion;
     public float radius;
     public float force;
-
+    public GameObject Player;
 
     ParticleSystem explosionPS;
     GameObject bomb_clone;
+    PlayerDeathRes PlayerDeath;
     void Start()
     {
         bomb_clone = bomb;
         explosionPS = explosion.GetComponent<ParticleSystem>();
+        PlayerDeath = Player.GetComponent<PlayerDeathRes>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,9 +36,11 @@ public class BombExpl : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject.tag == "Player" || colliders[i].gameObject.tag == "Enemy")
+            if (colliders[i].gameObject.tag == "Player") //colliders[i].gameObject.tag == "Enemy"
             {
-
+                Debug.Log("Я внутри");
+                PlayerDeath.Death();
+                Debug.Log("Я выхожу");
             }
             Rigidbody rigidbody = colliders[i].attachedRigidbody;
             if (rigidbody)

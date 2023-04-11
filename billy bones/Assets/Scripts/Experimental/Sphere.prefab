@@ -165,3 +165,4 @@ MonoBehaviour:
   explosion: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
   radius: 5
   force: 3000
+  Player: {fileID: 8552002796838627096, guid: bddf992ec0bf0764aa67a5c055af858f, type: 3}
