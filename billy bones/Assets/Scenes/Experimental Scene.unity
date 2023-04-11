@@ -1430,6 +1430,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2018821330288618375, guid: fc1d2176b5f57da45b5ab25d82b7d3ea, type: 3}
   m_PrefabInstance: {fileID: 1049635958}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1097092136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1097092137}
+  m_Layer: 0
+  m_Name: gameOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1097092137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097092136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.743633, y: 1.4017801, z: 7.683402}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1179109856
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3692,10 @@ PrefabInstance:
       propertyPath: timerDead
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8552002796838627088, guid: bddf992ec0bf0764aa67a5c055af858f, type: 3}
+      propertyPath: DeadScreen
+      value: 
+      objectReference: {fileID: 1097092136}
     - target: {fileID: 8552002796838627088, guid: bddf992ec0bf0764aa67a5c055af858f, type: 3}
       propertyPath: spawnPoint
       value: 

@@ -25,9 +25,9 @@ public class BombExpl : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             GameObject explosion_clone = Instantiate(explosion, bomb.transform.position, Quaternion.identity);
-            Explode();
             Destroy(bomb_clone);
-            Destroy(explosion_clone, explosionPS.main.duration);       
+            Destroy(explosion_clone, explosionPS.main.duration);
+            Explode();
         }
     }
 

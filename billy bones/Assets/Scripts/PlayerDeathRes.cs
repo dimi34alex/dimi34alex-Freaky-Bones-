@@ -20,20 +20,18 @@ public class PlayerDeathRes : MonoBehaviour
     public void Death()
     {
         isDeath = true;
+        Respawn();
     }
-    private void Update()
+    public void Respawn()
     {
-        if (isDeath == true)
+        timer += Time.fixedDeltaTime;
+        DeadScreen.SetActive(true);
+        if (timer >= timerDead)
         {
-            timer += Time.fixedDeltaTime;
-            DeadScreen.SetActive(true);
-            if (timer >= timerDead)
-            {
-                transform.position = spawnPoint.transform.position;
-                isDeath = false;
-                timer = 0;
-                DeadScreen.SetActive(false);
-            }
+            transform.position = spawnPoint.transform.position;
+            isDeath = false;
+            timer = 0;
+            DeadScreen.SetActive(false);
         }
     }
 }
