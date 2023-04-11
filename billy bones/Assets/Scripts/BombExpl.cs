@@ -6,42 +6,25 @@ public class BombExpl : MonoBehaviour
 {
     public GameObject bomb;
     public GameObject explosion;
-    Rigidbody rb;
-    ParticleSystem explosion_PS;
-    public float timer = 0;
+    readonly Explosion_preferens exp_pr;
+    
     public bool is_explosion = false;
-    GameObject explosion_clone;
     GameObject bomb_clone;
+    GameObject explosion_clone;
     // Start is called before the first frame update
     void Start()
     {
-        rb = bomb.GetComponent<Rigidbody>();
-        explosion_PS = explosion.GetComponent<ParticleSystem>();
         bomb_clone = bomb;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (is_explosion)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 2)
-            {
-                Destroy(explosion_clone);
-                is_explosion = false;
-            }
-        }
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
             explosion_clone = Instantiate(explosion, bomb.transform.position, Quaternion.identity);
-
-            is_explosion = true;
-            Debug.Log("ЫЫЫЫЫЫЫЫЫЫЫЫЫЫ");
+            exp_pr.IsExplosion(explosion_clone);
             Destroy(bomb_clone);
+            Debug.Log("Дошел до конца");
                         
         }
     }
