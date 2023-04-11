@@ -5,7 +5,12 @@ using UnityEngine;
 public class MusicValue_SampleScene : MonoBehaviour
 {
     private AudioSource audio;
-    public float audio_volume = 1f;
+    public static float audio_volume;
+
+    public void SetVolume(float vol)
+    {
+        audio_volume = vol;
+    }
 
     public void Get_volume()
     {
@@ -14,11 +19,13 @@ public class MusicValue_SampleScene : MonoBehaviour
 
     void Start()
     {
+        Get_volume();
         audio = GetComponent<AudioSource>();
+        audio.volume = MusicValue.data_volume;
     }
 
     void Update()
     {
-        audio.volume = MusicValue.data_volume;
+        audio.volume = audio_volume;
     }
 }

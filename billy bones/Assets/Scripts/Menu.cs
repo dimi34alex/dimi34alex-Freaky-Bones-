@@ -10,7 +10,6 @@ public class Menu : MonoBehaviour
     public GameObject MainMenu, Settings, Loading, LogoFront, Logo, LogoBack;
     public bool Quit_Press = false, Pause_Press = false;
     public int count = 0;
-    private Animator anim;
 
     public void Logo_f()
     {
@@ -22,11 +21,10 @@ public class Menu : MonoBehaviour
     {
         Logo.SetActive(false);
         LogoBack.SetActive(false);
-        Invoke("LogoFront_off", 1f);
+        Invoke("LogoFront_off", 2f);
         MainMenu.SetActive(true);
         Settings.SetActive(false);
         Loading.SetActive(false);
-        anim.SetBool("IsRunning", false);
     }
 
     public void LogoFront_off()
@@ -46,7 +44,6 @@ public class Menu : MonoBehaviour
         MainMenu.SetActive(false);
         Settings.SetActive(false);
         Loading.SetActive(true);
-        anim.SetBool("IsRunning", true);
         Invoke("ActivationMainScene", 5f);
     }
 
@@ -62,7 +59,6 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         Logo_f();
     }
 
