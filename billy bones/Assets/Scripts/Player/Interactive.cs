@@ -210,7 +210,12 @@ public class Interactive : MonoBehaviour
                 {
                     if(PlayerCanPick) Drop();
                     player_item = _hit.transform.gameObject;
-                    player_item.GetComponent<Collider>().enabled = false;
+
+                    foreach (Collider c in player_item.GetComponents<Collider> ())
+                    {
+                        c.enabled = false;
+                    }
+
                     player_item.GetComponent<Rigidbody>().isKinematic = true;
                     player_item.transform.parent = hand.transform;
                     player_item.transform.localPosition = Vector3.zero;
@@ -239,6 +244,7 @@ public class Interactive : MonoBehaviour
                 {
                     if(HandCanPick) Drop();
                     hand_item = _hit.transform.gameObject;
+                    hand_item.GetComponent<Collider>().enabled = false;
                     hand_item.GetComponent<Rigidbody>().isKinematic = true;
                     hand_item.transform.parent = hand2.transform;
                     hand_item.transform.localPosition = new Vector3(-0.09f,0.03f,-0.01f);
@@ -249,6 +255,10 @@ public class Interactive : MonoBehaviour
                 {
                     if(HandCanPick) Drop();
                     hand_item = _hit.transform.gameObject;
+                    foreach (Collider c in hand_item.GetComponents<Collider> ())
+                    {
+                        c.enabled = false;
+                    }
                     hand_item.GetComponent<Rigidbody>().isKinematic = true;
                     hand_item.transform.parent = hand2.transform;
                     hand_item.transform.localPosition = new Vector3(0f,0.105f,0.008f);
@@ -267,7 +277,10 @@ public class Interactive : MonoBehaviour
         if(GetComponent<CameraTeleport>().SwitchView == true)
         {
             player_item.transform.parent = null;
-            player_item.GetComponent<Collider>().enabled = true;
+            foreach (Collider c in player_item.GetComponents<Collider>())
+            {
+                c.enabled = true;
+            }
             player_item.GetComponent<Rigidbody>().isKinematic = false;
             PlayerCanPick = false;
             player_item = null;            
@@ -275,7 +288,10 @@ public class Interactive : MonoBehaviour
         if(GetComponent<CameraTeleport>().SwitchView == false)
         {
             hand_item.transform.parent = null;
-            hand_item.GetComponent<Collider>().enabled = true;
+            foreach (Collider c in hand_item.GetComponents<Collider>())
+            {
+                c.enabled = true;
+            }
             hand_item.GetComponent<Rigidbody>().isKinematic = false;
             HandCanPick = false;
             hand_item = null;            
