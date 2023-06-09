@@ -78,7 +78,7 @@ public class Move : MonoBehaviour
     }
     void Footstep()
     {
-        int randInd = Random.Range(0, footsteps.Length);
+        int randInd = Random.Range(0, footsteps.Length - 1);
 
         playeraudio.PlayOneShot(footsteps[randInd]);
     }

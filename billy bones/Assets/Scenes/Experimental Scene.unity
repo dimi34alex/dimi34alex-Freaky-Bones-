@@ -3704,6 +3704,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Billy
       objectReference: {fileID: 0}
+    - target: {fileID: 8552002796838627096, guid: bddf992ec0bf0764aa67a5c055af858f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552002796838627101, guid: bddf992ec0bf0764aa67a5c055af858f, type: 3}
+      propertyPath: Camera1
+      value: 
+      objectReference: {fileID: 1741489194}
     - target: {fileID: 8552002796838627102, guid: bddf992ec0bf0764aa67a5c055af858f, type: 3}
       propertyPath: m_RootOrder
       value: 2

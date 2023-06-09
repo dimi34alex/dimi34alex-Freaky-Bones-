@@ -166,7 +166,10 @@ public class Interactive : MonoBehaviour
         }
         else
         {
-            outline.GetComponent<Outline>().OutlineWidth = 0;
+            if (outline != null)
+            {
+                outline.GetComponent<Outline>().OutlineWidth = 0;
+            }
         }
     }
 
