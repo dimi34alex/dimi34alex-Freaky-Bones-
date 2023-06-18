@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Things_Trigger : MonoBehaviour
 {
+
     public bool CanUse1 = false;
     public bool CanUse2 = false;
+
+    public bool thrown = false;
+
+
+    void OnCollisionEnter(Collision other)
+    {
+         thrown = false;
+
+    }
+
+
     void OnTriggerEnter (Collider other)
     {
         if(other.tag == "Player")

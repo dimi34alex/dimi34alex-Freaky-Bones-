@@ -187,13 +187,14 @@ public class Interactive : MonoBehaviour
         {
             if((_hit.transform.tag == "Sword" || _hit.transform.tag == "Key" || _hit.transform.tag == "Shvabra" || _hit.transform.tag == "Stone" ) && _hit.transform.GetComponent<Things_Trigger>().CanUse1 == true) //&& GetComponent<CameraTeleport>().SwitchView == true)
             {
+                Debug.Log("О ВИЖУ ЕГО");
                 if(_hit.transform.tag == "Sword")
                 {
                     if(PlayerCanPick) Drop();
                     player_item = _hit.transform.gameObject;
                     player_item.GetComponent<Collider>().enabled = false;
-                    player_item.GetComponent<Rigidbody>().isKinematic = true;
-                    player_item.transform.parent = hand.transform;
+                    player_item.GetComponent<Rigidbody>().isKinematic = true; //родак
+                    player_item.transform.parent = hand.transform; //родак
                     player_item.transform.localPosition = Vector3.zero;
                     player_item.transform.localEulerAngles = new Vector3(172f,270f,93f);
                     PlayerCanPick = true;                    
@@ -379,6 +380,7 @@ public class Interactive : MonoBehaviour
                     player_item.GetComponent<Rigidbody>().isKinematic = false;
                     player_item.GetComponent<Collider>().enabled = true;
                     player_item.GetComponent<Rigidbody>().velocity = hand.transform.forward * v;
+                    player_item.GetComponent<Things_Trigger>().thrown = true;
                     PlayerCanPick = false;
                     player_item = null;
                 }                
