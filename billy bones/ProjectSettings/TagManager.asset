@@ -13,6 +13,7 @@ TagManager:
   - Shvabra
   - EXIT
   - Ground
+  - Darkness
   layers:
   - Default
   - TransparentFX
