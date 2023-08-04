@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 298588794682005764}
+  - component: {fileID: 8137148828208011328}
+  - component: {fileID: 5014876445974383968}
   m_Layer: 0
   m_Name: Shelf_Trap
   m_TagString: Untagged
@@ -49,6 +51,32 @@ Transform:
   m_Father: {fileID: 298588795524753488}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8137148828208011328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298588794682005765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a3f04f6019ebb4891035d61c8ab8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerDeathControll: {fileID: 0}
+--- !u!65 &5014876445974383968
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298588794682005765}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8588864, z: 0.29802975}
+  m_Center: {x: -8.1903533e-16, y: 1.204064, z: -0.22778483}
 --- !u!1 &298588795524753490
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanUse1: 0
   CanUse2: 0
+  thrown: 0
 --- !u!4 &298588794158656465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8842cdd23cd83c14c9425c0ae07507c7, type: 3}
@@ -694,6 +723,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 298588794682005764}
     m_Modifications:
+    - target: {fileID: -6860895033569716450, guid: 36e948af173868141a822ed806b581c0, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 36e948af173868141a822ed806b581c0, type: 3}
       propertyPath: m_Name
       value: Shelf

@@ -56,7 +56,7 @@ public class Interactive : MonoBehaviour
         }
         else if(Input.GetMouseButton(1) == false)
         {
-            ChangeAngle = 30;
+            ChangeAngle = 15;
             Trajectory.gameObject.SetActive(false);
 
             BodyAnim.SetBool("ZamahTime", false);
@@ -187,7 +187,6 @@ public class Interactive : MonoBehaviour
         {
             if((_hit.transform.tag == "Sword" || _hit.transform.tag == "Key" || _hit.transform.tag == "Shvabra" || _hit.transform.tag == "Stone" ) && _hit.transform.GetComponent<Things_Trigger>().CanUse1 == true) //&& GetComponent<CameraTeleport>().SwitchView == true)
             {
-                Debug.Log("О ВИЖУ ЕГО");
                 if(_hit.transform.tag == "Sword")
                 {
                     if(PlayerCanPick) Drop();
@@ -354,16 +353,16 @@ public class Interactive : MonoBehaviour
                 Vector3 speed = (_hit.point - hand.transform.position)*v;
                 Trajectory.ShowTrajectory(hand.transform.position, hand.transform.forward * v); 
 
-                if(Input.GetMouseButton(0))
-                {
-                    if( ChangeAngle > 5)
-                    {
-                        ChangeAngle -= 10 * Time.deltaTime;
-                    }                         
-                }
+                //if(Input.GetMouseButton(0))
+                //{
+                    //if( ChangeAngle > 5)
+                    //{
+                        //ChangeAngle -= 10 * Time.deltaTime;
+                    //}                         
+                //}
                 if(Input.GetMouseButtonUp(0))
                 {
-                    ChangeAngle = 30;
+                    ChangeAngle = 15;
                     Trajectory.gameObject.SetActive(false);
 
                     BodyAnim.SetBool("Throws",true);

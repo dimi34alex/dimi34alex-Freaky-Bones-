@@ -16,7 +16,7 @@ public class PlayerDead : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if(Dead == true)
         {
             Skeleton.SetActive(false);
 
