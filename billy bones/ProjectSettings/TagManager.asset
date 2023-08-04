@@ -15,6 +15,7 @@ TagManager:
   - Ground
   - Darkness
   - RealPlayer
+  - Enemy
   layers:
   - Default
   - TransparentFX

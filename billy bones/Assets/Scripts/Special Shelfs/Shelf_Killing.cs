@@ -11,5 +11,10 @@ public class Shelf_Killing : MonoBehaviour
         {
             PlayerDeathControll.GetComponent<PlayerDead>().Dead = true;
         }
+        if(other.tag == "Enemy")
+        {
+            GameObject enteredObject = other.gameObject;
+            enteredObject.gameObject.GetComponent<EnemyDeath>().dead = true;
+        }
     }
 }

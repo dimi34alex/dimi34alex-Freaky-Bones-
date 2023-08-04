@@ -51,7 +51,7 @@ public class Move : MonoBehaviour
     {
         ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if(Input.GetMouseButton(0))// && Camera1.GetComponent<CameraTeleport>().SwitchView == true)
+        if(Input.GetMouseButton(0) && Camera1.GetComponent<CameraTeleport>().SwitchView == true)
         {         
             ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit,500, whatCanBeClickedOn))

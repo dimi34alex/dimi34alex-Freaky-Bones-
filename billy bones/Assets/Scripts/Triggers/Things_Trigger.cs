@@ -13,8 +13,12 @@ public class Things_Trigger : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+         if( other.collider.tag == "Enemy" && transform.gameObject.tag == "Sword" && thrown == true)
+         {
+            other.gameObject.GetComponent<EnemyDeath>().dead = true;
+            thrown = false;
+         }
          thrown = false;
-
     }
 
 
